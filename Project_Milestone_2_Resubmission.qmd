@@ -40,3 +40,13 @@ You can add options to executable code like this
 ```
 
 The `echo: false` option disables the printing of code (only output is displayed).
+
+```{r}
+library(tidyverse)
+read_csv("/home/rstudio/PHW251_2025/PH251w-Group/ca_pop_2023.csv")
+read_csv("/home/rstudio/PHW251_2025/PH251w-Group/sim_novelid_CA.csv")
+read_csv("/home/rstudio/PHW251_2025/PH251w-Group/sim_novelid_LACounty.csv")
+```
+
+```{r}
+```

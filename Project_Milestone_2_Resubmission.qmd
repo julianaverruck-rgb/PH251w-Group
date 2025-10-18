@@ -26,27 +26,50 @@ editor: visual
 
 -   The only one that needed cleaning into the snake case format was sim_LA. The reason for that is because the names were all in caps. In order to do so, we had to use the function "rename_with(TOLOWER)." The other two data sets were already in snake case, so no cleaning up was needed.
 
-\`\`\`{r}
-
-```{r}
-1 + 1
-```
-
-You can add options to executable code like this
-
-```{r}
-#| echo: false
-2 * 2
-```
-
-The `echo: false` option disables the printing of code (only output is displayed).
-
 ```{r}
 library(tidyverse)
-read_csv("/home/rstudio/PHW251_2025/PH251w-Group/ca_pop_2023.csv")
-read_csv("/home/rstudio/PHW251_2025/PH251w-Group/sim_novelid_CA.csv")
-read_csv("/home/rstudio/PHW251_2025/PH251w-Group/sim_novelid_LACounty.csv")
+library(janitor)
+library(dplyr)
+ca_pop <- read_csv("/home/rstudio/PH251w-Group/ca_pop_2023.csv")
+sim_CA <- read_csv("/home/rstudio/PH251w-Group/sim_novelid_CA.csv")
+sim_LA <- read_csv("/home/rstudio/PH251w-Group/sim_novelid_LACounty.csv")
 ```
 
 ```{r}
+sim_LA <- sim_LA %>%
+  rename_with(tolower)
+```
+
+```{r}
+str(ca_pop)
+str(sim_CA)
+str(sim_LA)
+```
+
+```{r}
+mean(ca_pop$pop)
+```
+
+```{r}
+median(ca_pop$pop)
+```
+
+```{r}
+range(ca_pop$pop)
+```
+
+```{r}
+unique(ca_pop$county)
+```
+
+```{r}
+unique(ca_pop$race7)
+```
+
+```{r}
+unique(ca_pop$sex)
+```
+
+```{r}
+unique(ca_pop$age_cat)
 ```

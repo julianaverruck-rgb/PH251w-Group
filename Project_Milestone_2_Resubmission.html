@@ -98,11 +98,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="project-milestone-2" class="level2">
 <h2 class="anchored" data-anchor-id="project-milestone-2">Project Milestone 2</h2>
-<p>Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <a href="https://quarto.org" class="uri">https://quarto.org</a>.</p>
-</section>
-<section id="running-code" class="level2">
-<h2 class="anchored" data-anchor-id="running-code">Running Code</h2>
-<p>When you click the <strong>Render</strong> button a document will be generated that includes both content and the output of embedded code. You can embed code like this:</p>
+<p><strong># What is the data source?</strong></p>
+<ul>
+<li>The data set is from 2023 and came in as csv via GitHub.</li>
+</ul>
+<p><strong># How does the dataset relate to the group problem statement and question?</strong></p>
+<ul>
+<li>The dataset relate to the group problem statement and question because we are investigating the outbreak in California. The dataset provides information about California residents: such as age, race, and other important aspects of this research.</li>
+</ul>
+<p><strong># Document the import process</strong></p>
+<ul>
+<li>The way we obtained the data sets were we downloaded it from github into our local disk. From there, we used the “read.csv” function to import it into our R.</li>
+</ul>
+<p><strong># Identify data types for 5+ data elements/columns/variables:</strong></p>
+<ul>
+<li>The five elements we chose are within the ca_pop_2023 data set. We chose county, age category, sex, race, and population size. We did not find that health officer region is useful in our scenario.</li>
+</ul>
+<p><strong># Data elements that need cleaning or re-categorization</strong></p>
+<ul>
+<li>The only one that needed cleaning into the snake case format was sim_LA. The reason for that is because the names were all in caps. In order to do so, we had to use the function “rename_with(TOLOWER).” The other two data sets were already in snake case, so no cleaning up was needed.</li>
+</ul>
+<p>```{r}</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">

@@ -6,9 +6,13 @@ editor: visual
 
 ## Project Milestone 2
 
-**\# What is the data source?**
+**What is the data source?**
 
 -   The data set is from 2023 and came in as csv via GitHub.
+
+**Description of Dataset in Detail**
+
+-   ca_pop describes the demographic information (age category, race, sex) for various subjects in different counties and regions in the state of California as well as the population. sim_CA describes the demographic (age, sex, race) information of individual subjects and their disease status in different counties in California. sim_LA also describes demographic information (age, sex, race) and disease status for different disease instances for individual subjects in LA.
 
 **How does the dataset relate to the group problem statement and question?**
 
@@ -35,6 +39,8 @@ sim_LA <- read_csv("/home/rstudio/PH251w-Group/sim_novelid_LACounty.csv",
 **Five elements for our analysis:**
 
 -   The five elements we chose are within the ca_pop_2023 data set. We chose county, age category, sex, race, and population size. We did not find that health officer region is useful in our scenario.
+-   For sim_CA, we can identify new_infections, cumulative_infected, cumulative_unrecovered, and cumulative_severe as important for our analysis
+-   For sim_LA, we can identify dx_new, infected cumulative, unrecovered_cumulative, severe_new and severe_cumulative
 
 **Utilize functions or resources in RStudio to determine the types of each data element (i.e. character, numeric, factor)**
 

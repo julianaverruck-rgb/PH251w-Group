@@ -98,9 +98,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="project-milestone-2" class="level2">
 <h2 class="anchored" data-anchor-id="project-milestone-2">Project Milestone 2</h2>
-<p><strong># What is the data source?</strong></p>
+<p><strong>What is the data source?</strong></p>
 <ul>
 <li>The data set is from 2023 and came in as csv via GitHub.</li>
+</ul>
+<p><strong>Description of Dataset in Detail</strong></p>
+<ul>
+<li>ca_pop describes the demographic information (age category, race, sex) for various subjects in different counties and regions in the state of California as well as the population. sim_CA describes the demographic (age, sex, race) information of individual subjects and their disease status in different counties in California. sim_LA also describes demographic information (age, sex, race) and disease status for different disease instances for individual subjects in LA.</li>
 </ul>
 <p><strong>How does the dataset relate to the group problem statement and question?</strong></p>
 <ul>
@@ -180,6 +184,8 @@ lgl (1): DT_REPORT
 <p><strong>Five elements for our analysis:</strong></p>
 <ul>
 <li>The five elements we chose are within the ca_pop_2023 data set. We chose county, age category, sex, race, and population size. We did not find that health officer region is useful in our scenario.</li>
+<li>For sim_CA, we can identify new_infections, cumulative_infected, cumulative_unrecovered, and cumulative_severe as important for our analysis</li>
+<li>For sim_LA, we can identify dx_new, infected cumulative, unrecovered_cumulative, severe_new and severe_cumulative</li>
 </ul>
 <p><strong>Utilize functions or resources in RStudio to determine the types of each data element (i.e.&nbsp;character, numeric, factor)</strong></p>
 <div class="cell">

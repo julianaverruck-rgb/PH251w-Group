@@ -16,7 +16,7 @@ editor: visual
 
 **\# Document the import process**
 
--   The way we obtained the data sets were we downloaded it from github into our local disk. From there, we used the "read.csv" function to import it into our R.
+-   The way we obtained the data sets were we downloaded it from github into our local disk. From there, then uploaded it onto our repo where we could then use the "read_csv" function to import it into our R.
 
 **\# Identify data types for 5+ data elements/columns/variables:**
 

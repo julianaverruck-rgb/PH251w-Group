@@ -102,47 +102,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>The data set is from 2023 and came in as csv via GitHub.</li>
 </ul>
-<p><strong># How does the dataset relate to the group problem statement and question?</strong></p>
+<p><strong>How does the dataset relate to the group problem statement and question?</strong></p>
 <ul>
 <li>The dataset relate to the group problem statement and question because we are investigating the outbreak in California. The dataset provides information about California residents: such as age, race, and other important aspects of this research.</li>
 </ul>
-<p><strong># Document the import process</strong></p>
+<p><strong>Import Statement and documenting the import process</strong></p>
 <ul>
-<li>The way we obtained the data sets were we downloaded it from github into our local disk. From there, then uploaded it onto our repo where we could then use the “read_csv” function to import it into our R.</li>
-</ul>
-<p><strong># Identify data types for 5+ data elements/columns/variables:</strong></p>
-<ul>
-<li>The five elements we chose are within the ca_pop_2023 data set. We chose county, age category, sex, race, and population size. We did not find that health officer region is useful in our scenario.</li>
-</ul>
-<p><strong># Data elements that need cleaning or re-categorization</strong></p>
-<ul>
-<li>The only one that needed cleaning into the snake case format was sim_LA. The reason for that is because the names were all in caps. In order to do so, we had to use the function “rename_with(TOLOWER).” The other two data sets were already in snake case, so no cleaning up was needed.</li>
+<li>The way we obtained the data sets were we downloaded it from github into our local disk. From there, then uploaded it onto our repo where we could then use the “read_csv” function to import it into our R since they are all .csv files. We also an argument to transform any NA, N/A or blank data into missing data type.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'janitor'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:stats':
+
+    chisq.test, fisher.test</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
 ✔ dplyr     1.1.4     ✔ readr     2.1.5
 ✔ forcats   1.0.0     ✔ stringr   1.5.1
 ✔ ggplot2   3.5.1     ✔ tibble    3.2.1
 ✔ lubridate 1.9.3     ✔ tidyr     1.3.1
-✔ purrr     1.0.2     
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✔ purrr     1.0.2     </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()
 ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-Attaching package: 'janitor'
-
-The following objects are masked from 'package:stats':
-
-    chisq.test, fisher.test</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>ca_pop <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"/home/rstudio/PH251w-Group/ca_pop_2023.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>ca_pop <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"/home/rstudio/PH251w-Group/ca_pop_2023.csv"</span>,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">na =</span> <span class="fu">c</span>(<span class="st">"NA"</span>, <span class="st">"N/A"</span>, <span class="st">""</span>, <span class="st">"null"</span>, <span class="st">"-"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Rows: 90132 Columns: 6
 ── Column specification ────────────────────────────────────────────────────────
@@ -153,7 +149,8 @@ dbl (1): pop
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>sim_CA <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"/home/rstudio/PH251w-Group/sim_novelid_CA.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>sim_CA <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"/home/rstudio/PH251w-Group/sim_novelid_CA.csv"</span>,</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">na =</span> <span class="fu">c</span>(<span class="st">"NA"</span>, <span class="st">"N/A"</span>, <span class="st">""</span>, <span class="st">"null"</span>, <span class="st">"-"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Rows: 98952 Columns: 12
 ── Column specification ────────────────────────────────────────────────────────
@@ -165,7 +162,8 @@ date (1): dt_diagnosis
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>sim_LA <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"/home/rstudio/PH251w-Group/sim_novelid_LACounty.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>sim_LA <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"/home/rstudio/PH251w-Group/sim_novelid_LACounty.csv"</span>,</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">na =</span> <span class="fu">c</span>(<span class="st">"NA"</span>, <span class="st">"N/A"</span>, <span class="st">""</span>, <span class="st">"null"</span>, <span class="st">"-"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Rows: 1736 Columns: 11
 ── Column specification ────────────────────────────────────────────────────────
@@ -178,12 +176,14 @@ lgl (1): DT_REPORT
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
 </div>
+<p><strong>Identify data types for 5+ data elements/columns/variables:</strong></p>
+<p><strong>Five elements for our analysis:</strong></p>
+<ul>
+<li>The five elements we chose are within the ca_pop_2023 data set. We chose county, age category, sex, race, and population size. We did not find that health officer region is useful in our scenario.</li>
+</ul>
+<p><strong>Utilize functions or resources in RStudio to determine the types of each data element (i.e.&nbsp;character, numeric, factor)</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>sim_LA <span class="ot">&lt;-</span> sim_LA <span class="sc">%&gt;%</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename_with</span>(tolower)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(ca_pop)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(ca_pop)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>spc_tbl_ [90,132 × 6] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
  $ county               : chr [1:90132] "Alameda" "Alameda" "Alameda" "Alameda" ...
@@ -203,7 +203,7 @@ lgl (1): DT_REPORT
   .. )
  - attr(*, "problems")=&lt;externalptr&gt; </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(sim_CA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(sim_CA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>spc_tbl_ [98,952 × 12] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
  $ county                : chr [1:98952] "Alameda County" "Alameda County" "Alameda County" "Alameda County" ...
@@ -235,20 +235,20 @@ lgl (1): DT_REPORT
   .. )
  - attr(*, "problems")=&lt;externalptr&gt; </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(sim_LA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(sim_LA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>spc_tbl_ [1,736 × 11] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
- $ dt_dx                 : chr [1:1736] "29MAY2023" "05JUN2023" "12JUN2023" "19JUN2023" ...
- $ age_category          : chr [1:1736] "0-17" "0-17" "0-17" "0-17" ...
- $ sex                   : chr [1:1736] "FEMALE" "FEMALE" "FEMALE" "FEMALE" ...
- $ race_eth              : chr [1:1736] "White, Non-Hispanic" "White, Non-Hispanic" "White, Non-Hispanic" "White, Non-Hispanic" ...
- $ dt_report             : logi [1:1736] NA NA NA NA NA NA ...
- $ dx_new                : num [1:1736] 15 17 23 51 67 75 106 83 91 173 ...
- $ infected_cumulative   : num [1:1736] 15 32 55 106 173 248 354 437 528 701 ...
- $ unrecovered_new       : num [1:1736] 0 0 0 0 1 1 4 3 1 3 ...
- $ unrecovered_cumulative: num [1:1736] 0 0 0 0 1 2 6 9 10 13 ...
- $ severe_new            : num [1:1736] 0 0 0 0 0 0 0 1 0 0 ...
- $ severe_cumulative     : num [1:1736] 0 0 0 0 0 0 0 1 1 1 ...
+ $ DT_DX                 : chr [1:1736] "29MAY2023" "05JUN2023" "12JUN2023" "19JUN2023" ...
+ $ AGE_CATEGORY          : chr [1:1736] "0-17" "0-17" "0-17" "0-17" ...
+ $ SEX                   : chr [1:1736] "FEMALE" "FEMALE" "FEMALE" "FEMALE" ...
+ $ RACE_ETH              : chr [1:1736] "White, Non-Hispanic" "White, Non-Hispanic" "White, Non-Hispanic" "White, Non-Hispanic" ...
+ $ DT_REPORT             : logi [1:1736] NA NA NA NA NA NA ...
+ $ DX_NEW                : num [1:1736] 15 17 23 51 67 75 106 83 91 173 ...
+ $ INFECTED_CUMULATIVE   : num [1:1736] 15 32 55 106 173 248 354 437 528 701 ...
+ $ UNRECOVERED_NEW       : num [1:1736] 0 0 0 0 1 1 4 3 1 3 ...
+ $ UNRECOVERED_CUMULATIVE: num [1:1736] 0 0 0 0 1 2 6 9 10 13 ...
+ $ SEVERE_NEW            : num [1:1736] 0 0 0 0 0 0 0 1 0 0 ...
+ $ SEVERE_CUMULATIVE     : num [1:1736] 0 0 0 0 0 0 0 1 1 1 ...
  - attr(*, "spec")=
   .. cols(
   ..   DT_DX = col_character(),
@@ -265,27 +265,26 @@ lgl (1): DT_REPORT
   .. )
  - attr(*, "problems")=&lt;externalptr&gt; </code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">#This lists out each column and what data type it is.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p><strong>Identify the desired type/format for each variable—will you need to convert any columns to numeric or another type?</strong></p>
+<ul>
+<li>Some considerations that I notice is age_cat in all 3 datasets could be converted to factor data to make it easier for analysis. Additionally, it looks like the race_ethnicity column in the sim_CA dataset is numeric so that should be converted to factor for cleaner analysis.</li>
+</ul>
+<p><strong>Data elements that need cleaning or re-categorization</strong></p>
+<ul>
+<li>The only one that needed cleaning into the snake case format was sim_LA. The reason for that is because the names were all in caps. In order to do so, we had to use the function “rename_with(TOLOWER).” The other two data sets were already in snake case, so no cleaning up was needed.</li>
+</ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(ca_pop<span class="sc">$</span>pop)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 433.9088</code></pre>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>sim_LA <span class="ot">&lt;-</span> sim_LA <span class="sc">%&gt;%</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename_with</span>(tolower)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
+<p>County</p>
+<ul>
+<li>This is the description of the different unique counties in this dataset.</li>
+</ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(ca_pop<span class="sc">$</span>pop)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 15</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">range</span>(ca_pop<span class="sc">$</span>pop)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1]     0 45227</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(ca_pop<span class="sc">$</span>county)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(ca_pop<span class="sc">$</span>county)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "Alameda"         "Alpine"          "Amador"          "Butte"          
  [5] "Calaveras"       "Colusa"          "Contra Costa"    "Del Norte"      
@@ -303,26 +302,87 @@ lgl (1): DT_REPORT
 [53] "Trinity"         "Tulare"          "Tuolumne"        "Ventura"        
 [57] "Yolo"            "Yuba"           </code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">n_distinct</span>(ca_pop<span class="sc">$</span>county)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 58</code></pre>
 </div>
+</div>
+<p>Age Category</p>
+<ul>
+<li>This describes the unqiue values as well as the frequency of each.</li>
+</ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(ca_pop<span class="sc">$</span>race7)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(ca_pop<span class="sc">$</span>age_cat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "0-4"   "5-11"  "12-17" "18-49" "50-64" "65+"  </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(ca_pop<span class="sc">$</span>age_cat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  0-4 12-17 18-49  5-11 50-64   65+ 
+ 4060  4872 25984  5684 12180 37352 </code></pre>
+</div>
+</div>
+<p>Sex</p>
+<ul>
+<li>This describes the unqiue values as well as the frequency of each.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(ca_pop<span class="sc">$</span>sex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "FEMALE" "MALE"  </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(ca_pop<span class="sc">$</span>sex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+FEMALE   MALE 
+ 45066  45066 </code></pre>
+</div>
+</div>
+<p>Race</p>
+<ul>
+<li>This describes the unqiue values as well as the frequency of each.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(ca_pop<span class="sc">$</span>race7)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "WhiteTE NH" "Black NH"   "AIAN NH"    "Asian NH"   "NHPI NH"   
 [6] "MR NH"      "Hispanic"  </code></pre>
 </div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(ca_pop<span class="sc">$</span>sex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(ca_pop<span class="sc">$</span>race7)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "FEMALE" "MALE"  </code></pre>
+<pre><code>
+   AIAN NH   Asian NH   Black NH   Hispanic      MR NH    NHPI NH WhiteTE NH 
+     12876      12876      12876      12876      12876      12876      12876 </code></pre>
 </div>
 </div>
+<p>Population Size</p>
+<ul>
+<li>These are numerical summaries of the population size data column. This describes the mean, median, range (min,max).</li>
+</ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(ca_pop<span class="sc">$</span>age_cat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(ca_pop<span class="sc">$</span>pop, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "0-4"   "5-11"  "12-17" "18-49" "50-64" "65+"  </code></pre>
+<pre><code>[1] 433.9088</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(ca_pop<span class="sc">$</span>pop, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 15</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">range</span>(ca_pop<span class="sc">$</span>pop, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]     0 45227</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ca_pop<span class="sc">$</span>pop)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+    0.0     1.0    15.0   433.9   142.0 45227.0 </code></pre>
 </div>
 </div>
+<p><strong>Describe cleaning that each data source may need:</strong></p>
+<ul>
+<li></li>
+</ul>
 </section>
 
 </main>

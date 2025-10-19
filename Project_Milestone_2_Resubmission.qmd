@@ -10,66 +10,102 @@ editor: visual
 
 -   The data set is from 2023 and came in as csv via GitHub.
 
-**\# How does the dataset relate to the group problem statement and question?**
+**How does the dataset relate to the group problem statement and question?**
 
 -   The dataset relate to the group problem statement and question because we are investigating the outbreak in California. The dataset provides information about California residents: such as age, race, and other important aspects of this research.
 
-**\# Document the import process**
+**Import Statement and documenting the import process**
 
--   The way we obtained the data sets were we downloaded it from github into our local disk. From there, then uploaded it onto our repo where we could then use the "read_csv" function to import it into our R.
+-   The way we obtained the data sets were we downloaded it from github into our local disk. From there, then uploaded it onto our repo where we could then use the "read_csv" function to import it into our R since they are all .csv files. We also an argument to transform any NA, N/A or blank data into missing data type.
 
-**\# Identify data types for 5+ data elements/columns/variables:**
+```{r}
+library(janitor)
+library(tidyverse)
+library(dplyr)
+ca_pop <- read_csv("/home/rstudio/PH251w-Group/ca_pop_2023.csv",
+                   na = c("NA", "N/A", "", "null", "-"))
+sim_CA <- read_csv("/home/rstudio/PH251w-Group/sim_novelid_CA.csv",
+                   na = c("NA", "N/A", "", "null", "-"))
+sim_LA <- read_csv("/home/rstudio/PH251w-Group/sim_novelid_LACounty.csv",
+                   na = c("NA", "N/A", "", "null", "-"))
+```
+
+**Identify data types for 5+ data elements/columns/variables:**
+
+**Five elements for our analysis:**
 
 -   The five elements we chose are within the ca_pop_2023 data set. We chose county, age category, sex, race, and population size. We did not find that health officer region is useful in our scenario.
 
-**\# Data elements that need cleaning or re-categorization**
-
--   The only one that needed cleaning into the snake case format was sim_LA. The reason for that is because the names were all in caps. In order to do so, we had to use the function "rename_with(TOLOWER)." The other two data sets were already in snake case, so no cleaning up was needed.
+**Utilize functions or resources in RStudio to determine the types of each data element (i.e. character, numeric, factor)**
 
 ```{r}
-library(tidyverse)
-library(janitor)
-library(dplyr)
-ca_pop <- read_csv("/home/rstudio/PH251w-Group/ca_pop_2023.csv")
-sim_CA <- read_csv("/home/rstudio/PH251w-Group/sim_novelid_CA.csv")
-sim_LA <- read_csv("/home/rstudio/PH251w-Group/sim_novelid_LACounty.csv")
+str(ca_pop)
+str(sim_CA)
+str(sim_LA)
+
+#This lists out each column and what data type it is.
 ```
+
+**Identify the desired type/format for each variable—will you need to convert any columns to numeric or another type?**
+
+-   Some considerations that I notice is age_cat in all 3 datasets could be converted to factor data to make it easier for analysis. Additionally, it looks like the race_ethnicity column in the sim_CA dataset is numeric so that should be converted to factor for cleaner analysis.
+
+**Data elements that need cleaning or re-categorization**
+
+-   The only one that needed cleaning into the snake case format was sim_LA. The reason for that is because the names were all in caps. In order to do so, we had to use the function "rename_with(TOLOWER)." The other two data sets were already in snake case, so no cleaning up was needed.
 
 ```{r}
 sim_LA <- sim_LA %>%
   rename_with(tolower)
 ```
 
-```{r}
-str(ca_pop)
-str(sim_CA)
-str(sim_LA)
-```
+County
 
-```{r}
-mean(ca_pop$pop)
-```
-
-```{r}
-median(ca_pop$pop)
-```
-
-```{r}
-range(ca_pop$pop)
-```
+-   This is the description of the different unique counties in this dataset.
 
 ```{r}
 unique(ca_pop$county)
+n_distinct(ca_pop$county)
 ```
 
-```{r}
-unique(ca_pop$race7)
-```
+Age Category
 
-```{r}
-unique(ca_pop$sex)
-```
+-   This describes the unqiue values as well as the frequency of each.
 
 ```{r}
 unique(ca_pop$age_cat)
+table(ca_pop$age_cat)
 ```
+
+Sex
+
+-   This describes the unqiue values as well as the frequency of each.
+
+```{r}
+unique(ca_pop$sex)
+table(ca_pop$sex)
+```
+
+Race
+
+-   This describes the unqiue values as well as the frequency of each.
+
+```{r}
+unique(ca_pop$race7)
+table(ca_pop$race7)
+```
+
+Population Size
+
+-   These are numerical summaries of the population size data column. This describes the mean, median, range (min,max).
+
+```{r}
+mean(ca_pop$pop, na.rm = TRUE)
+median(ca_pop$pop, na.rm = TRUE)
+range(ca_pop$pop, na.rm = TRUE)
+summary(ca_pop$pop)
+```
+
+**Describe cleaning that each data source may need:**
+
+-   
